@@ -1,0 +1,129 @@
+{
+  "name": "polyglot-vscode",
+  "displayName": "Polyglot — Local GPU Translation",
+  "description": "Translate text, files, and READMEs using TranslateGemma via Ollama — 55 languages, zero cloud dependency",
+  "version": "0.1.0",
+  "publisher": "mcp-tool-shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop-org/polyglot-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop-org/polyglot-vscode/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/polyglot-vscode#readme",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "translation",
+    "ollama",
+    "translategemma",
+    "gpu",
+    "polyglot",
+    "mcp",
+    "local"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "polyglot.translateSelection",
+        "title": "Polyglot: Translate Selection",
+        "category": "Polyglot"
+      },
+      {
+        "command": "polyglot.translateFile",
+        "title": "Polyglot: Translate File",
+        "category": "Polyglot"
+      },
+      {
+        "command": "polyglot.translateReadme",
+        "title": "Polyglot: Translate README",
+        "category": "Polyglot"
+      },
+      {
+        "command": "polyglot.checkStatus",
+        "title": "Polyglot: Check Status",
+        "category": "Polyglot"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "polyglot.translateSelection",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "polyglot.translateFile",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "polyglot.translateReadme",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "polyglot.checkStatus",
+          "when": "true"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "polyglot.translateSelection",
+          "when": "editorHasSelection",
+          "group": "1_modification@100"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Polyglot",
+      "properties": {
+        "polyglot.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Ollama server URL"
+        },
+        "polyglot.model": {
+          "type": "string",
+          "default": "translategemma:12b",
+          "description": "Ollama translation model"
+        },
+        "polyglot.defaultLanguages": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["ja", "zh", "es", "fr", "hi", "it", "pt-BR"],
+          "description": "Default target languages for README translation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "compile": "tsc -p ./",
+    "test": "vitest run",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "dependencies": {
+    "@mcptoolshop/polyglot-mcp": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  }
+}
