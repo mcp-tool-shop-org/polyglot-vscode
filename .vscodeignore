@@ -2,8 +2,11 @@
 .vscode-test/**
 src/**
 node_modules/**
+site/**
 esbuild.mjs
 tsconfig.json
 .gitignore
 *.vsix
 .github/**
+assets/**
+README.*.md
