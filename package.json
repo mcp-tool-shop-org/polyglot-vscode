@@ -36,6 +36,28 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "polyglot",
+          "title": "Polyglot",
+          "icon": "$(globe)"
+        }
+      ]
+    },
+    "views": {
+      "polyglot": [
+        {
+          "id": "polyglot.actions",
+          "name": "Translate",
+          "type": "webview"
+        },
+        {
+          "id": "polyglot.status",
+          "name": "Status"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "polyglot.translateSelection",
@@ -66,6 +88,12 @@
         "title": "Help",
         "category": "Polyglot",
         "icon": "$(question)"
+      },
+      {
+        "command": "polyglot.refreshStatus",
+        "title": "Refresh Status",
+        "category": "Polyglot",
+        "icon": "$(refresh)"
       }
     ],
     "keybindings": [
@@ -102,6 +130,13 @@
           "command": "polyglot.translateSelection",
           "when": "editorHasSelection",
           "group": "1_modification@100"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "polyglot.refreshStatus",
+          "when": "view == polyglot.status",
+          "group": "navigation"
         }
       ],
       "editor/title": [
