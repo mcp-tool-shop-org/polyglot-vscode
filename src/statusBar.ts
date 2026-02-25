@@ -14,6 +14,10 @@ export function createStatusBar(context: vscode.ExtensionContext): void {
   statusBarItem.show();
   context.subscriptions.push(statusBarItem);
 
+  // Show "checking" state immediately
+  statusBarItem.text = '$(sync~spin) Polyglot';
+  statusBarItem.tooltip = 'Checking Ollama connection…';
+
   // Initial check
   pollOllama();
 
@@ -30,26 +34,43 @@ async function pollOllama(): Promise<void> {
     const available = await client.isAvailable();
     if (!available) {
       statusBarItem.text = '$(warning) Polyglot';
-      statusBarItem.tooltip = 'Ollama is not running — click to check status';
-      statusBarItem.color = new vscode.ThemeColor('statusBarItem.warningForeground');
+      statusBarItem.tooltip = new vscode.MarkdownString(
+        '$(warning) **Ollama is not running**\n\nClick to start Ollama or check your setup.'
+      );
+      statusBarItem.backgroundColor = new vscode.ThemeColor(
+        'statusBarItem.warningBackground'
+      );
+      statusBarItem.color = undefined;
       return;
     }
 
     const hasModel = await client.hasModel(model);
     if (!hasModel) {
       statusBarItem.text = '$(cloud-download) Polyglot';
-      statusBarItem.tooltip = `Ollama running but model "${model}" not found — click to check status`;
-      statusBarItem.color = new vscode.ThemeColor('statusBarItem.warningForeground');
+      statusBarItem.tooltip = new vscode.MarkdownString(
+        `$(cloud-download) **Model not installed**\n\n\`${model}\` needs to be downloaded (~8GB). Click to set up.`
+      );
+      statusBarItem.backgroundColor = new vscode.ThemeColor(
+        'statusBarItem.warningBackground'
+      );
+      statusBarItem.color = undefined;
       return;
     }
 
     statusBarItem.text = '$(globe) Polyglot';
-    statusBarItem.tooltip = `Polyglot ready — ${model} via Ollama`;
+    statusBarItem.tooltip = new vscode.MarkdownString(
+      `$(globe) **Polyglot ready**\n\nModel: \`${model}\`\nServer: \`${ollamaUrl}\`\n55 languages available\n\n_Click for status details_`
+    );
+    statusBarItem.backgroundColor = undefined;
     statusBarItem.color = undefined;
-  } catch (err) {
-    log(`Status poll error: ${err instanceof Error ? err.message : String(err)}`);
+  } catch {
     statusBarItem.text = '$(error) Polyglot';
-    statusBarItem.tooltip = 'Error checking Ollama status';
-    statusBarItem.color = new vscode.ThemeColor('statusBarItem.errorForeground');
+    statusBarItem.tooltip = new vscode.MarkdownString(
+      '$(error) **Connection error**\n\nCould not reach Ollama. Click to troubleshoot.'
+    );
+    statusBarItem.backgroundColor = new vscode.ThemeColor(
+      'statusBarItem.errorBackground'
+    );
+    statusBarItem.color = undefined;
   }
 }

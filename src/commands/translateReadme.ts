@@ -2,13 +2,15 @@ import * as vscode from 'vscode';
 import * as path from 'node:path';
 import { resolveLanguage } from '@mcptoolshop/polyglot-mcp/languages';
 import { translateReadme as doTranslate } from '../readmeTranslator.js';
-import { getConfig, pickLanguages, log } from '../util.js';
+import { getConfig, getOutputChannel, pickLanguages, log, friendlyError } from '../util.js';
 
 export async function translateReadme(): Promise<void> {
   // Find README.md in workspace root
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders || workspaceFolders.length === 0) {
-    vscode.window.showWarningMessage('No workspace folder open.');
+    vscode.window.showWarningMessage(
+      'Open a folder that contains a README.md first.'
+    );
     return;
   }
 
@@ -20,19 +22,24 @@ export async function translateReadme(): Promise<void> {
     const bytes = await vscode.workspace.fs.readFile(readmeUri);
     readmeContent = Buffer.from(bytes).toString('utf-8');
   } catch {
-    vscode.window.showWarningMessage('No README.md found in workspace root.');
+    vscode.window.showWarningMessage(
+      `No README.md found in ${path.basename(rootUri.fsPath)}. ` +
+        'Create one first, then run this command again.'
+    );
     return;
   }
 
   const { ollamaUrl, model, defaultLanguages } = getConfig();
 
   const targetCodes = await pickLanguages(
-    'Translate README to… (select languages)',
+    'Which languages? (pre-selected from your settings)',
     defaultLanguages
   );
   if (!targetCodes) return;
 
   const total = targetCodes.length;
+  const startTime = Date.now();
+  let succeeded = 0;
 
   await vscode.window.withProgress(
     {
@@ -67,17 +74,29 @@ export async function translateReadme(): Promise<void> {
             Buffer.from(translated, 'utf-8')
           );
 
-          log(`README translated to ${name} → ${path.basename(outUri.fsPath)}`);
+          succeeded++;
+          log(`README → ${name}: ${path.basename(outUri.fsPath)}`);
         } catch (err) {
-          const msg = err instanceof Error ? err.message : String(err);
-          vscode.window.showErrorMessage(`Failed to translate to ${name}: ${msg}`);
-          log(`README translation error (${name}): ${msg}`);
+          friendlyError(`Failed translating README to ${name}`, err);
         }
       }
 
-      vscode.window.showInformationMessage(
-        `README translated to ${total} language(s).`
-      );
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(0);
+      if (succeeded === total) {
+        vscode.window.showInformationMessage(
+          `README translated to ${total} language(s) in ${elapsed}s.`,
+          'Show Output'
+        ).then((action) => {
+          if (action === 'Show Output') getOutputChannel().show();
+        });
+      } else {
+        vscode.window.showWarningMessage(
+          `${succeeded}/${total} translations completed. Check the output for errors.`,
+          'Show Output'
+        ).then((action) => {
+          if (action === 'Show Output') getOutputChannel().show();
+        });
+      }
     }
   );
 }

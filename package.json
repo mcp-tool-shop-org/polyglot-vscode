@@ -28,7 +28,8 @@
     "gpu",
     "polyglot",
     "mcp",
-    "local"
+    "local",
+    "i18n"
   ],
   "activationEvents": [
     "onStartupFinished"
@@ -38,23 +39,41 @@
     "commands": [
       {
         "command": "polyglot.translateSelection",
-        "title": "Polyglot: Translate Selection",
-        "category": "Polyglot"
+        "title": "Translate Selection",
+        "category": "Polyglot",
+        "icon": "$(globe)"
       },
       {
         "command": "polyglot.translateFile",
-        "title": "Polyglot: Translate File",
-        "category": "Polyglot"
+        "title": "Translate File",
+        "category": "Polyglot",
+        "icon": "$(file)"
       },
       {
         "command": "polyglot.translateReadme",
-        "title": "Polyglot: Translate README",
-        "category": "Polyglot"
+        "title": "Translate README",
+        "category": "Polyglot",
+        "icon": "$(book)"
       },
       {
         "command": "polyglot.checkStatus",
-        "title": "Polyglot: Check Status",
-        "category": "Polyglot"
+        "title": "Check Status",
+        "category": "Polyglot",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "polyglot.help",
+        "title": "Help",
+        "category": "Polyglot",
+        "icon": "$(question)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "polyglot.translateSelection",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "editorHasSelection"
       }
     ],
     "menus": {
@@ -65,15 +84,17 @@
         },
         {
           "command": "polyglot.translateFile",
-          "when": "workspaceFolderCount > 0"
+          "when": "editorIsOpen"
         },
         {
           "command": "polyglot.translateReadme",
           "when": "workspaceFolderCount > 0"
         },
         {
-          "command": "polyglot.checkStatus",
-          "when": "true"
+          "command": "polyglot.checkStatus"
+        },
+        {
+          "command": "polyglot.help"
         }
       ],
       "editor/context": [
@@ -90,21 +111,71 @@
         "polyglot.ollamaUrl": {
           "type": "string",
           "default": "http://localhost:11434",
-          "description": "Ollama server URL"
+          "description": "Ollama server URL",
+          "order": 1
         },
         "polyglot.model": {
           "type": "string",
           "default": "translategemma:12b",
-          "description": "Ollama translation model"
+          "description": "Ollama translation model (e.g. translategemma:12b, translategemma:2b for lighter GPU)",
+          "order": 2
+        },
+        "polyglot.defaultSourceLanguage": {
+          "type": "string",
+          "default": "en",
+          "description": "Default source language code (e.g. en, ja, es)",
+          "order": 3
         },
         "polyglot.defaultLanguages": {
           "type": "array",
           "items": { "type": "string" },
           "default": ["ja", "zh", "es", "fr", "hi", "it", "pt-BR"],
-          "description": "Default target languages for README translation"
+          "description": "Default target languages for README translation",
+          "order": 4
         }
       }
-    }
+    },
+    "walkthroughs": [
+      {
+        "id": "polyglot.welcome",
+        "title": "Get Started with Polyglot",
+        "description": "Translate text, files, and READMEs — powered by your local GPU.",
+        "steps": [
+          {
+            "id": "polyglot.welcome.status",
+            "title": "Check your setup",
+            "description": "Polyglot uses Ollama to run TranslateGemma on your local GPU. Let's make sure everything is connected.\n\n[Check Status](command:polyglot.checkStatus)",
+            "media": {
+              "markdown": "media/walkthrough-status.md"
+            }
+          },
+          {
+            "id": "polyglot.welcome.translate",
+            "title": "Translate some text",
+            "description": "Select any text in an editor, then press **Ctrl+Alt+T** (or **Cmd+Alt+T** on Mac) to translate it. You can also right-click and choose **Translate Selection**.\n\n[Open a file to try it](command:workbench.action.files.newUntitledFile)",
+            "media": {
+              "markdown": "media/walkthrough-translate.md"
+            }
+          },
+          {
+            "id": "polyglot.welcome.readme",
+            "title": "Translate a README",
+            "description": "Open a project with a README.md, then run **Polyglot: Translate README** from the Command Palette. It translates to 7 languages by default — preserving code blocks, tables, and badges.\n\n[Translate README](command:polyglot.translateReadme)",
+            "media": {
+              "markdown": "media/walkthrough-readme.md"
+            }
+          },
+          {
+            "id": "polyglot.welcome.settings",
+            "title": "Customize your setup",
+            "description": "Change the model, Ollama URL, or default languages in Settings.\n\n[Open Polyglot Settings](command:workbench.action.openSettings?%22polyglot%22)",
+            "media": {
+              "markdown": "media/walkthrough-settings.md"
+            }
+          }
+        ]
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
