@@ -103,6 +103,23 @@
           "when": "editorHasSelection",
           "group": "1_modification@100"
         }
+      ],
+      "editor/title": [
+        {
+          "command": "polyglot.translateSelection",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        },
+        {
+          "command": "polyglot.translateFile",
+          "when": "editorIsOpen",
+          "group": "polyglot@1"
+        },
+        {
+          "command": "polyglot.translateReadme",
+          "when": "workspaceFolderCount > 0",
+          "group": "polyglot@2"
+        }
       ]
     },
     "configuration": {
