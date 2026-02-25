@@ -20,18 +20,7 @@ import { config } from '../site-config';
   footerText={config.footerText}
   nav={config.sections.map(s => ({ href: `#${s.id}`, label: s.title }))}
 >
-  {config.hero.imageUrl ? (
-    <div style="display:flex;align-items:center;gap:0;max-width:1200px;margin:0 auto">
-      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:flex-start;padding:1rem 1rem 1rem 0">
-        <img src={config.hero.imageUrl} alt={config.title} width="500" height="500" style="border-radius:12px;display:block" />
-      </div>
-      <div style="flex:1;min-width:0">
-        <Hero {...config.hero} />
-      </div>
-    </div>
-  ) : (
-    <Hero {...config.hero} />
-  )}
+  <Hero {...config.hero} />
 
   {config.sections.map((s) => (
     <Section id={s.id} title={s.title} subtitle={s.subtitle}>

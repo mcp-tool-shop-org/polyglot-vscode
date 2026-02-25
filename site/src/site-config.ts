@@ -20,7 +20,6 @@ export const config: SiteConfig = {
       { label: 'Shortcut', code: 'Select text → Ctrl+Alt+T → Pick language → Done' },
       { label: 'README', code: 'Polyglot: Translate README → 7 languages in one click' },
     ],
-    imageUrl: 'logo.png',
   },
 
   sections: [
