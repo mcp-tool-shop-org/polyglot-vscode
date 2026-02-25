@@ -12,7 +12,7 @@ export const config: SiteConfig = {
     badge: 'v0.1.0 — VS Code Extension',
     headline: 'Local GPU Translation',
     headlineAccent: 'inside VS Code.',
-    description: '<img src="logo.png" width="120" style="margin-bottom:1rem"><br>55 languages. Zero cloud dependency. All translation happens on your machine via TranslateGemma 12B + Ollama.',
+    description: '55 languages. Zero cloud dependency. All translation happens on your machine via TranslateGemma 12B + Ollama.',
     primaryCta: { href: '#commands', label: 'See commands' },
     secondaryCta: { href: '#getting-started', label: 'Get started' },
     previews: [

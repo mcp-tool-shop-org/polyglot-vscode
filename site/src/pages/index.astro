@@ -22,6 +22,10 @@ import { config } from '../site-config';
 >
   <Hero {...config.hero} />
 
+  <div style="max-width:900px;margin:0 auto;padding:0 1.5rem 3rem">
+    <img src="logo.png" alt="Polyglot" style="width:100%;border-radius:12px" />
+  </div>
+
   {config.sections.map((s) => (
     <Section id={s.id} title={s.title} subtitle={s.subtitle}>
       {s.kind === 'features' && <FeatureGrid features={s.features} />}
