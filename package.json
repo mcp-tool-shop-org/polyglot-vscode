@@ -2,7 +2,7 @@
   "name": "polyglot-vscode",
   "displayName": "Polyglot — Local GPU Translation",
   "description": "Translate text, files, and READMEs using TranslateGemma via Ollama — 55 languages, zero cloud dependency",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "mcp-tool-shop",
   "license": "MIT",
   "repository": {
@@ -180,8 +180,18 @@
         },
         "polyglot.defaultLanguages": {
           "type": "array",
-          "items": { "type": "string" },
-          "default": ["ja", "zh", "es", "fr", "hi", "it", "pt-BR"],
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "ja",
+            "zh",
+            "es",
+            "fr",
+            "hi",
+            "it",
+            "pt-BR"
+          ],
           "description": "Default target languages for README translation",
           "order": 4
         }
