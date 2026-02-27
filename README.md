@@ -1,11 +1,5 @@
 <p align="center">
-  <a href="README.ja.md">日本語</a> |
-  <a href="README.zh.md">中文</a> |
-  <a href="README.es.md">Español</a> |
-  <a href="README.fr.md">Français</a> |
-  <a href="README.hi.md">हिन्दी</a> |
-  <a href="README.it.md">Italiano</a> |
-  <a href="README.pt-BR.md">Português</a>
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
 </p>
 
 <p align="center">
@@ -16,6 +10,8 @@
 
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/polyglot-vscode/actions"><img src="https://github.com/mcp-tool-shop-org/polyglot-vscode/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=mcp-tool-shop.polyglot-vscode"><img src="https://img.shields.io/visual-studio-marketplace/v/mcp-tool-shop.polyglot-vscode" alt="VS Marketplace"></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/polyglot-vscode"><img src="https://img.shields.io/codecov/c/github/mcp-tool-shop-org/polyglot-vscode" alt="Coverage"></a>
   <a href="https://github.com/mcp-tool-shop-org/polyglot-vscode/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href="https://mcp-tool-shop-org.github.io/polyglot-vscode/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
@@ -89,8 +85,25 @@ For README translation, it uses intelligent segmentation — code blocks, HTML b
 
 ## Privacy
 
-All translation happens locally on your GPU. Nothing is sent to any cloud service. Your text never leaves your machine.
+All translation happens locally on your GPU. Nothing is sent to any cloud service. Your text never leaves your machine. No telemetry.
+
+## Scorecard
+
+| Category | Score | Notes |
+|----------|-------|-------|
+| A. Security | 10/10 | SECURITY.md, local-only, no telemetry, no cloud |
+| B. Error Handling | 8/10 | Status bar feedback, Ollama auto-recovery, error messages |
+| C. Operator Docs | 9/10 | README, CHANGELOG, walkthrough, settings docs |
+| D. Shipping Hygiene | 9/10 | CI + tests (88), VS Code Marketplace, VSIX packaging |
+| E. Identity | 10/10 | Logo, translations, landing page, marketplace listing |
+| **Total** | **46/50** | |
 
 ## License
 
 MIT
+
+---
+
+<p align="center">
+  Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>

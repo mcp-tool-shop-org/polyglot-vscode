@@ -6,10 +6,10 @@ export const config: SiteConfig = {
   logoBadge: '🌐',
   brandName: 'Polyglot',
   repoUrl: 'https://github.com/mcp-tool-shop-org/polyglot-vscode',
-  footerText: 'MIT Licensed — built by <a href="https://github.com/mcp-tool-shop-org" style="color:var(--color-muted);text-decoration:underline">mcp-tool-shop-org</a>',
+  footerText: 'MIT Licensed — built by <a href="https://mcp-tool-shop.github.io/" style="color:var(--color-muted);text-decoration:underline">MCP Tool Shop</a>',
 
   hero: {
-    badge: 'v0.1.1 — VS Code Extension',
+    badge: 'v0.1.3 — VS Code Extension',
     headline: 'Local GPU Translation',
     headlineAccent: 'inside VS Code.',
     description: '55 languages. Zero cloud dependency. All translation happens on your machine via TranslateGemma 12B + Ollama.',
@@ -94,6 +94,20 @@ export const config: SiteConfig = {
         { title: 'Auto-detect Language', desc: 'Automatically detect the source language instead of defaulting to English.' },
         { title: 'Translation History', desc: 'Keep a log of recent translations with undo/redo support.' },
         { title: 'Custom Glossaries', desc: 'Define project-specific term translations for consistent technical writing.' },
+      ],
+    },
+    {
+      kind: 'data-table',
+      id: 'scorecard',
+      title: 'Quality scorecard',
+      subtitle: 'Ship Gate audit — 46/50.',
+      columns: ['Category', 'Score', 'Notes'],
+      rows: [
+        ['A. Security', '10/10', 'SECURITY.md, local-only, no telemetry, no cloud'],
+        ['B. Error Handling', '8/10', 'Status bar feedback, Ollama auto-recovery, error messages'],
+        ['C. Operator Docs', '9/10', 'README, CHANGELOG, walkthrough, settings docs'],
+        ['D. Shipping Hygiene', '9/10', 'CI + tests (88), VS Code Marketplace, VSIX packaging'],
+        ['E. Identity', '10/10', 'Logo, translations, landing page, marketplace listing'],
       ],
     },
   ],

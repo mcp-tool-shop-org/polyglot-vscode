@@ -1,4 +1,8 @@
 <p align="center">
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (BR)</a>
+</p>
+
+<p align="center">
   <img src="media/icon.png" width="400" alt="Polyglot">
 </p>
 
@@ -6,6 +10,8 @@
 
 <p align="center">
   <a href="https://github.com/mcp-tool-shop-org/polyglot-vscode/actions"><img src="https://github.com/mcp-tool-shop-org/polyglot-vscode/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=mcp-tool-shop.polyglot-vscode"><img src="https://img.shields.io/visual-studio-marketplace/v/mcp-tool-shop.polyglot-vscode" alt="VS Marketplace"></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/polyglot-vscode"><img src="https://img.shields.io/codecov/c/github/mcp-tool-shop-org/polyglot-vscode" alt="Coverage"></a>
   <a href="https://github.com/mcp-tool-shop-org/polyglot-vscode/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
   <a href="https://mcp-tool-shop-org.github.io/polyglot-vscode/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page"></a>
 </p>
@@ -14,64 +20,52 @@
 
 ## Cosa fa
 
-Polyglot esegue [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) tramite [Ollama](https://ollama.com) sulla GPU del vostro computer. Non sono necessari codici API, servizi cloud o trasferimento di dati al di fuori del vostro dispositivo.
+Polyglot esegue [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) tramite [Ollama](https://ollama.com) sulla tua GPU locale. Non richiede chiavi API, servizi cloud o trasferimento di dati dal tuo computer.
 
-- **Traduzione di selezione di testo:** Selezionare il testo, premere `Ctrl+Alt+T`, scegliere una lingua. Fatto.
-- **Traduzione di un file:** Tradurre un intero file, creando un nuovo file con estensione `.ja.ext` accanto all'originale.
-- **Traduzione di README:** Tradurre in batch il file README.md in 7 lingue, preservando blocchi di codice, tabelle e badge.
-- **Pannello laterale:** Icona del globo nella barra delle attività, con pulsanti di azione e informazioni sullo stato di Ollama in tempo reale.
+- **Traduci selezione** — Seleziona il testo, premi `Ctrl+Alt+T`, scegli una lingua. Fatto.
+- **Traduci file** — Traduce un intero file in un nuovo file `file.ja.ext` accanto all'originale.
+- **Traduci README** — Traduce in batch il tuo file README.md in 7 lingue, preservando blocchi di codice, tabelle e badge.
+- **Pannello laterale** — Icona del globo nella barra delle attività con pulsanti di azione e stato di Ollama in tempo reale.
 
 ## Requisiti
 
-- [Ollama](https://ollama.com) installato e in esecuzione.
-- Una GPU con una quantità di VRAM sufficiente per il modello (12 GB per `translategemma:12b`, 2 GB per `translategemma:2b`).
-- Il modello viene scaricato automaticamente al primo utilizzo.
+- [Ollama](https://ollama.com) installato e in esecuzione
+- Una GPU con VRAM sufficiente per il modello (12 GB per `translategemma:12b`, 2 GB per `translategemma:2b`)
+- Il modello viene scaricato automaticamente al primo utilizzo
 
 ## Come iniziare
 
-1. Installare l'estensione.
-2. Cliccare sull'icona del globo nella barra delle attività (barra laterale sinistra).
-3. Cliccare su **Verifica stato** – Polyglot avvierà Ollama e scaricherà il modello, se necessario.
-4. Selezionare del testo e premere `Ctrl+Alt+T` (o `Cmd+Alt+T` su Mac).
+1. Installa l'estensione
+2. Clicca sull'icona del globo nella barra delle attività (barra laterale sinistra)
+3. Clicca su **Verifica stato** — Polyglot avvierà Ollama e scaricherà il modello, se necessario
+4. Seleziona del testo e premi `Ctrl+Alt+T` (o `Cmd+Alt+T` su Mac)
 
 ## Comandi
 
-| Comando. | Scorciatoia. | Descrizione. |
-| Certo, ecco la traduzione:
-
-"Please provide the English text you would like me to translate into Italian." | Certainly. Please provide the English text you would like me to translate. | Certo, ecco la traduzione:
-
-"Please provide the English text you would like me to translate into Italian." |
-| **Polyglot: Selezione di traduzioni** | `Ctrl+Alt+T` | Traduci il testo selezionato direttamente nel documento. |
-| **Polyglot: Translate File** | — | Tradurre il file corrente in un nuovo file. |
-| **Polyglot: Tradurre il file README** | — | Tradurre in blocco il file README.md in diverse lingue. |
-| **Polyglot: Check Status** | — | Verificare la connessione con Ollama e la disponibilità del modello. |
-| **Polyglot: Help** | — | Accesso rapido alle impostazioni, alle istruzioni e ai link utili. |
+| Comando | Scorciatoia | Descrizione |
+|---------|----------|-------------|
+| **Polyglot: Traduci selezione** | `Ctrl+Alt+T` | Traduce il testo selezionato direttamente |
+| **Polyglot: Translate File** | — | Traduce il file corrente in un nuovo file |
+| **Polyglot: Traduci README** | — | Traduce in batch il file README.md in più lingue |
+| **Polyglot: Check Status** | — | Verifica la connessione a Ollama e la disponibilità del modello |
+| **Polyglot: Help** | — | Accesso rapido alle impostazioni, alla guida e ai link |
 
 ## Punti di accesso
 
-- **Pannello laterale:** Icona del globo nella barra delle attività, con pulsanti di azione personalizzati.
-- **Barra del titolo dell'editor:** L'icona del globo appare quando del testo è selezionato.
-- **Menu contestuale (clic destro):** "Traduci la selezione" nel menu contestuale dell'editor.
-- **Palette dei comandi:** `Ctrl+Shift+P` → digitare "Polyglot".
-- **Scorciatoia da tastiera:** `Ctrl+Alt+T` con del testo selezionato.
+- **Pannello laterale** — Icona del globo nella barra delle attività con pulsanti di azione stilizzati
+- **Barra del titolo dell'editor** — L'icona del globo appare quando viene selezionato del testo
+- **Menu contestuale** — "Traduci selezione" nel menu contestuale dell'editor
+- **Palette dei comandi** — `Ctrl+Shift+P` → digita "Polyglot"
+- **Scorciatoia da tastiera** — `Ctrl+Alt+T` con testo selezionato
 
 ## Impostazioni
 
-| Ambientazione. | Predefinito. | Descrizione. |
-| Certo, ecco la traduzione:
-
-"Please provide the English text you would like me to translate into Italian." | Certo, ecco la traduzione:
-
-"Please provide the English text you would like me to translate into Italian." | Certo, ecco la traduzione:
-
-"Please provide the English text you would like me to translate into Italian." |
-| `polyglot.ollamaUrl` | `http://localhost:11434` | URL del server Ollama. |
-| `polyglot.model` | `translategemma:12b` | Modello di traduzione (provare `2b` per ridurre l'utilizzo di VRAM). |
-| `polyglot.defaultSourceLanguage` | `en` | Ecco la traduzione:
-
-Lingua di origine per le traduzioni. |
-| `polyglot.defaultLanguages` | 7 lingue. | Lingue di destinazione per la traduzione del file README. |
+| Impostazione | Valore predefinito | Descrizione |
+|---------|---------|-------------|
+| `polyglot.ollamaUrl` | `http://localhost:11434` | URL del server Ollama |
+| `polyglot.model` | `translategemma:12b` | Modello di traduzione (prova `2b` per ridurre il consumo di VRAM) |
+| `polyglot.defaultSourceLanguage` | `en` | Lingua di origine per le traduzioni |
+| `polyglot.defaultLanguages` | 7 lingue | Lingue di destinazione per la traduzione di README |
 
 ## Lingue supportate
 
@@ -79,20 +73,37 @@ Arabo, bengalese, bulgaro, catalano, cinese (semplificato e tradizionale), croat
 
 ## Come funziona
 
-"Polyglot wraps" [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcptoolshop/polyglot-mcp), un motore di traduzione locale che:
+Polyglot utilizza [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcptoolshop/polyglot-mcp), un motore di traduzione locale che:
 
-1. Avvia automaticamente Ollama se non è in esecuzione.
-2. Scarica automaticamente il modello TranslateGemma al primo utilizzo.
-3. Divide testi lunghi in blocchi, rispettando i confini di paragrafi e frasi.
-4. Applica un glossario tecnico per garantire la precisione dei termini.
-5. Corregge automaticamente alcune problematiche comuni dei modelli (alternative duplicate, punti finali superflui).
+1. Avvia automaticamente Ollama se non è in esecuzione
+2. Scarica automaticamente il modello TranslateGemma al primo utilizzo
+3. Divide testi lunghi in paragrafi/frasi
+4. Applica un glossario software per termini tecnici precisi
+5. Corregge automaticamente problemi comuni del modello (alternative duplicate, punti finali)
 
-Per la traduzione dei file README, viene utilizzata una segmentazione intelligente: i blocchi di codice, i badge HTML e gli URL vengono mantenuti inalterati, mentre titoli, paragrafi e il contenuto delle tabelle vengono tradotti.
+Per la traduzione di README, utilizza una segmentazione intelligente: blocchi di codice, badge HTML e URL vengono preservati intatti, mentre titoli, paragrafi e contenuto delle tabelle vengono tradotti.
 
 ## Privacy
 
-Tutte le operazioni di traduzione vengono eseguite localmente sulla vostra GPU. Nessun dato viene inviato a servizi cloud. Il vostro testo non lascia mai il vostro dispositivo.
+Tutte le traduzioni avvengono localmente sulla tua GPU. Nulla viene inviato a servizi cloud. Il tuo testo non lascia mai il tuo computer. Nessuna telemetria.
+
+## Tabella di valutazione
+
+| Categoria | Punteggio | Note |
+|----------|-------|-------|
+| A. Sicurezza | 10/10 | SECURITY.md, solo locale, nessuna telemetria, nessuna componente cloud. |
+| B. Gestione degli errori | 8/10 | Feedback sulla barra di stato, ripristino automatico di Ollama, messaggi di errore. |
+| C. Documentazione per gli operatori | 9/10 | README, CHANGELOG, guida passo passo, documentazione delle impostazioni. |
+| D. Aspetti relativi alla distribuzione | 9/10 | CI + test (88), Marketplace di VS Code, confezionamento VSIX. |
+| E. Identità | 10/10 | Logo, traduzioni, pagina di presentazione, inserzione nel marketplace. |
+| **Total** | **46/50** | |
 
 ## Licenza
 
-MIT.
+MIT
+
+---
+
+<p align="center">
+  Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+</p>
