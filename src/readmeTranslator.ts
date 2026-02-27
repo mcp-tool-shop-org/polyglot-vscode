@@ -5,14 +5,14 @@
 
 import { translate } from '@mcptoolshop/polyglot-mcp/translate';
 
-interface Segment {
+export interface Segment {
   type: 'protected' | 'html-tagline' | 'heading' | 'text' | 'table';
   text: string;
   prefix?: string;
 }
 
 /** Parse README into segments: translatable text vs protected blocks. */
-function segmentReadme(md: string): Segment[] {
+export function segmentReadme(md: string): Segment[] {
   const segments: Segment[] = [];
   const lines = md.split('\n');
   let i = 0;
@@ -110,7 +110,7 @@ function segmentReadme(md: string): Segment[] {
 }
 
 /** Clean TranslateGemma quirks: strip "or" alternatives in various languages. */
-function cleanTranslation(text: string, isHeading = false): string {
+export function cleanTranslation(text: string, isHeading = false): string {
   const orPatterns = [
     /\nまたは\n.*/s, // Japanese
     /\n또는\n.*/s, // Korean
