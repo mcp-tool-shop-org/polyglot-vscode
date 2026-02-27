@@ -20,7 +20,7 @@
 
 ## O que ele faz
 
-O Polyglot executa o [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) através do [Ollama](https://ollama.com) na sua GPU local. Não requer chaves de API, serviços em nuvem ou envio de dados para fora da sua máquina.
+O Polyglot executa o [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) através do [Ollama](https://ollama.com) na sua GPU local. Não requer chaves de API, serviços em nuvem ou envio de dados para fora do seu computador.
 
 - **Traduzir Seleção** — Selecione o texto, pressione `Ctrl+Alt+T`, escolha um idioma. Pronto.
 - **Traduzir Arquivo** — Traduz um arquivo inteiro para um novo arquivo `file.ja.ext` junto com o original.
@@ -60,7 +60,7 @@ O Polyglot executa o [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/
 
 ## Configurações
 
-| Configuração | Valor padrão | Descrição |
+| Configuração | Padrão | Descrição |
 |---------|---------|-------------|
 | `polyglot.ollamaUrl` | `http://localhost:11434` | URL do servidor Ollama |
 | `polyglot.model` | `translategemma:12b` | Modelo de tradução (tente `2b` para usar menos VRAM) |
@@ -83,24 +83,13 @@ O Polyglot utiliza o [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@
 
 Para a tradução do README, utiliza uma segmentação inteligente — blocos de código, badges HTML e URLs são preservados sem alterações, enquanto títulos, parágrafos e conteúdo de tabelas são traduzidos.
 
-## Privacidade
+## Segurança e Escopo de Dados
 
-Todas as traduções são realizadas localmente na sua GPU. Nada é enviado para nenhum serviço em nuvem. O seu texto nunca sai da sua máquina. Não há telemetria.
-
-## Tabela de desempenho
-
-| Categoria | Pontuação | Observações |
-|----------|-------|-------|
-| A. Segurança | 10/10 | SECURITY.md, apenas para uso local, sem telemetria, sem nuvem. |
-| B. Tratamento de Erros | 8/10 | Feedback na barra de status, recuperação automática do Ollama, mensagens de erro. |
-| C. Documentação para Operadores | 9/10 | README, HISTÓRICO DE MUDANÇAS, guia passo a passo, documentação de configurações. |
-| D. Qualidade do Produto | 9/10 | Integração contínua + testes (88), Marketplace da VS Code, empacotamento VSIX. |
-| E. Identidade | 10/10 | Logotipo, traduções, página de apresentação, listagem no marketplace. |
-| **Total** | **46/50** | |
+**Dados acessados:** texto no editor ativo (somente leitura para seleção, permissão de escrita para substituição), arquivos no espaço de trabalho para "Traduzir Arquivo" / "Traduzir README" (cria novos arquivos ao lado dos originais). **Dados NÃO acessados:** nenhum arquivo fora do espaço de trabalho, nenhuma credencial do sistema operacional, nenhum dado do navegador. **Rede:** conecta-se apenas ao Ollama local (`localhost:11434` por padrão) — **sem saída para a nuvem**. **Nenhuma informação de telemetria** é coletada ou enviada.
 
 ## Licença
 
-MIT.
+MIT
 
 ---
 

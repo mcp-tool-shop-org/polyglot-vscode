@@ -20,12 +20,12 @@
 
 ## ¿Qué hace?
 
-Polyglot ejecuta [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) a través de [Ollama](https://ollama.com) en tu GPU local. No requiere claves de API, ni servicios en la nube, ni el envío de datos desde tu máquina.
+Polyglot ejecuta [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) a través de [Ollama](https://ollama.com) en tu GPU local. No requiere claves de API, ni servicios en la nube, ni transferencia de datos fuera de tu máquina.
 
-- **Traducir selección:** Selecciona el texto, presiona `Ctrl+Alt+T`, elige un idioma. ¡Listo!
-- **Traducir archivo:** Traduce un archivo completo a un nuevo archivo `file.ja.ext` junto con el original.
-- **Traducir README:** Traduce por lotes tu archivo README.md a 7 idiomas, conservando bloques de código, tablas y distintivos.
-- **Panel lateral:** Icono de globo en la barra de actividad con botones de acción y estado de Ollama en tiempo real.
+- **Traducir selección** — Selecciona el texto, presiona `Ctrl+Alt+T`, elige un idioma. ¡Listo!
+- **Traducir archivo** — Traduce un archivo completo a un nuevo archivo `file.ja.ext` junto con el original.
+- **Traducir README** — Traduce por lotes tu archivo README.md a 7 idiomas, conservando bloques de código, tablas y distintivos.
+- **Panel lateral** — Icono de globo en la barra de actividad con botones de acción y estado de Ollama en tiempo real.
 
 ## Requisitos
 
@@ -52,11 +52,11 @@ Polyglot ejecuta [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/tran
 
 ## Puntos de acceso
 
-- **Panel lateral:** Icono de globo en la barra de actividad con botones de acción con estilo.
-- **Barra de título del editor:** El icono del globo aparece cuando se selecciona texto.
-- **Menú contextual:** "Traducir selección" en el menú contextual del editor.
-- **Paleta de comandos:** `Ctrl+Shift+P` → escribe "Polyglot".
-- **Atajo de teclado:** `Ctrl+Alt+T` con texto seleccionado.
+- **Panel lateral** — Icono de globo en la barra de actividad con botones de acción con estilo.
+- **Barra de título del editor** — El icono del globo aparece cuando se selecciona texto.
+- **Menú contextual** — "Traducir selección" en el menú contextual del editor.
+- **Paleta de comandos** — `Ctrl+Shift+P` → escribe "Polyglot".
+- **Atajo de teclado** — `Ctrl+Alt+T` con texto seleccionado.
 
 ## Configuración
 
@@ -83,24 +83,13 @@ Polyglot utiliza [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcpt
 
 Para la traducción de README, utiliza una segmentación inteligente: los bloques de código, los distintivos HTML y las URL se conservan sin cambios, mientras que los encabezados, los párrafos y el contenido de las tablas se traducen.
 
-## Privacidad
+## Seguridad y alcance de los datos
 
-Todas las traducciones se realizan localmente en tu GPU. Nada se envía a ningún servicio en la nube. Tu texto nunca sale de tu máquina. No hay telemetría.
-
-## Tabla de rendimiento
-
-| Categoría | Puntuación | Notas |
-|----------|-------|-------|
-| A. Seguridad | 10/10 | SECURITY.md, solo local, sin telemetría, sin servicios en la nube. |
-| B. Manejo de errores | 8/10 | Retroalimentación en la barra de estado, recuperación automática de Ollama, mensajes de error. |
-| C. Documentación para operadores | 9/10 | README, registro de cambios, guía paso a paso, documentación de configuración. |
-| D. Calidad del producto | 9/10 | Integración continua + pruebas (88), tienda de VS Code, empaquetado VSIX. |
-| E. Identidad | 10/10 | Logotipo, traducciones, página de inicio, listado en la tienda. |
-| **Total** | **46/50** | |
+**Datos a los que se accede:** texto en el editor activo (solo lectura para la selección, escritura para el reemplazo), archivos en el espacio de trabajo para "Traducir archivo" / "Traducir README" (crea nuevos archivos junto a los originales). **Datos a los que NO se accede:** ningún archivo fuera del espacio de trabajo, ninguna credencial del sistema operativo, ningún dato del navegador. **Red:** se conecta únicamente a Ollama local (`localhost:11434` por defecto) — **sin conexión a la nube**. **No se recopilan ni se envían datos de telemetría**.
 
 ## Licencia
 
-MIT.
+MIT
 
 ---
 

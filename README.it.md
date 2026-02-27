@@ -20,11 +20,11 @@
 
 ## Cosa fa
 
-Polyglot esegue [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) tramite [Ollama](https://ollama.com) sulla tua GPU locale. Non richiede chiavi API, servizi cloud o trasferimento di dati dal tuo computer.
+Polyglot esegue [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) tramite [Ollama](https://ollama.com) sulla tua GPU locale. Non sono necessari codici API, non si utilizzano servizi cloud e i tuoi dati non lasciano il tuo computer.
 
-- **Traduci selezione** — Seleziona il testo, premi `Ctrl+Alt+T`, scegli una lingua. Fatto.
-- **Traduci file** — Traduce un intero file in un nuovo file `file.ja.ext` accanto all'originale.
-- **Traduci README** — Traduce in batch il tuo file README.md in 7 lingue, preservando blocchi di codice, tabelle e badge.
+- **Traduci la selezione** — Seleziona il testo, premi `Ctrl+Alt+T`, scegli una lingua. Fatto.
+- **Traduci il file** — Traduci un intero file in un nuovo file `file.ja.ext` accanto all'originale.
+- **Traduci README** — Traduci in batch il tuo file README.md in 7 lingue, preservando blocchi di codice, tabelle e badge.
 - **Pannello laterale** — Icona del globo nella barra delle attività con pulsanti di azione e stato di Ollama in tempo reale.
 
 ## Requisiti
@@ -37,24 +37,24 @@ Polyglot esegue [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/trans
 
 1. Installa l'estensione
 2. Clicca sull'icona del globo nella barra delle attività (barra laterale sinistra)
-3. Clicca su **Verifica stato** — Polyglot avvierà Ollama e scaricherà il modello, se necessario
+3. Clicca su **Verifica stato** — Polyglot avvierà Ollama e scaricherà il modello se necessario
 4. Seleziona del testo e premi `Ctrl+Alt+T` (o `Cmd+Alt+T` su Mac)
 
 ## Comandi
 
 | Comando | Scorciatoia | Descrizione |
 |---------|----------|-------------|
-| **Polyglot: Traduci selezione** | `Ctrl+Alt+T` | Traduce il testo selezionato direttamente |
-| **Polyglot: Translate File** | — | Traduce il file corrente in un nuovo file |
-| **Polyglot: Traduci README** | — | Traduce in batch il file README.md in più lingue |
+| **Polyglot: Traduci la selezione** | `Ctrl+Alt+T` | Traduci il testo selezionato direttamente |
+| **Polyglot: Translate File** | — | Traduci il file corrente in un nuovo file |
+| **Polyglot: Traduci README** | — | Traduci in batch il file README.md in più lingue |
 | **Polyglot: Check Status** | — | Verifica la connessione a Ollama e la disponibilità del modello |
 | **Polyglot: Help** | — | Accesso rapido alle impostazioni, alla guida e ai link |
 
 ## Punti di accesso
 
-- **Pannello laterale** — Icona del globo nella barra delle attività con pulsanti di azione stilizzati
+- **Pannello laterale** — Icona del globo nella barra delle attività con pulsanti di azione personalizzati
 - **Barra del titolo dell'editor** — L'icona del globo appare quando viene selezionato del testo
-- **Menu contestuale** — "Traduci selezione" nel menu contestuale dell'editor
+- **Menu contestuale** — "Traduci la selezione" nel menu contestuale dell'editor
 - **Palette dei comandi** — `Ctrl+Shift+P` → digita "Polyglot"
 - **Scorciatoia da tastiera** — `Ctrl+Alt+T` con testo selezionato
 
@@ -77,26 +77,15 @@ Polyglot utilizza [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcp
 
 1. Avvia automaticamente Ollama se non è in esecuzione
 2. Scarica automaticamente il modello TranslateGemma al primo utilizzo
-3. Divide testi lunghi in paragrafi/frasi
+3. Divide testi lunghi in blocchi a livello di paragrafo/frase
 4. Applica un glossario software per termini tecnici precisi
 5. Corregge automaticamente problemi comuni del modello (alternative duplicate, punti finali)
 
 Per la traduzione di README, utilizza una segmentazione intelligente: blocchi di codice, badge HTML e URL vengono preservati intatti, mentre titoli, paragrafi e contenuto delle tabelle vengono tradotti.
 
-## Privacy
+## Sicurezza e ambito dei dati
 
-Tutte le traduzioni avvengono localmente sulla tua GPU. Nulla viene inviato a servizi cloud. Il tuo testo non lascia mai il tuo computer. Nessuna telemetria.
-
-## Tabella di valutazione
-
-| Categoria | Punteggio | Note |
-|----------|-------|-------|
-| A. Sicurezza | 10/10 | SECURITY.md, solo locale, nessuna telemetria, nessuna componente cloud. |
-| B. Gestione degli errori | 8/10 | Feedback sulla barra di stato, ripristino automatico di Ollama, messaggi di errore. |
-| C. Documentazione per gli operatori | 9/10 | README, CHANGELOG, guida passo passo, documentazione delle impostazioni. |
-| D. Aspetti relativi alla distribuzione | 9/10 | CI + test (88), Marketplace di VS Code, confezionamento VSIX. |
-| E. Identità | 10/10 | Logo, traduzioni, pagina di presentazione, inserzione nel marketplace. |
-| **Total** | **46/50** | |
+**Dati a cui si accede:** testo nell'editor attivo (solo lettura per la selezione, scrittura per la sostituzione), file nello spazio di lavoro per le funzioni "Traduci file" / "Traduci README" (crea nuovi file accanto agli originali). **Dati a cui NON si accede:** nessun file al di fuori dello spazio di lavoro, nessuna credenziale del sistema operativo, nessun dato del browser. **Rete:** si connette solo a un'istanza locale di Ollama (`localhost:11434` per impostazione predefinita) – **nessuna connessione in uscita verso il cloud**. **Nessun dato di telemetria** viene raccolto o trasmesso.
 
 ## Licenza
 

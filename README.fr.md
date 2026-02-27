@@ -23,8 +23,8 @@
 Polyglot exécute [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/translategemma) via [Ollama](https://ollama.com) sur votre GPU local. Pas de clés API, pas de services cloud, aucune donnée ne quitte votre machine.
 
 - **Traduire la sélection** : Sélectionnez du texte, appuyez sur `Ctrl+Alt+T`, choisissez une langue. C'est tout.
-- **Traduire un fichier** : Traduisez un fichier entier dans un nouveau fichier `file.ja.ext` en parallèle du fichier original.
-- **Traduire README** : Traduisez en masse votre fichier README.md dans 7 langues, en préservant les blocs de code, les tableaux et les badges.
+- **Traduire un fichier** : Traduisez un fichier entier dans un nouveau fichier `file.ja.ext` en parallèle avec le fichier original.
+- **Traduire README** : Traduisez en masse votre fichier README.md dans 7 langues, en conservant les blocs de code, les tableaux et les badges.
 - **Panneau latéral** : Icône de globe dans la barre d'activité avec des boutons d'action et l'état d'Ollama en direct.
 
 ## Prérequis
@@ -35,9 +35,9 @@ Polyglot exécute [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/tra
 
 ## Premiers pas
 
-1. Installez l'extension.
-2. Cliquez sur l'icône du globe dans la barre d'activité (barre latérale gauche).
-3. Cliquez sur **Vérifier l'état** : Polyglot démarrera Ollama et téléchargera le modèle si nécessaire.
+1. Installez l'extension
+2. Cliquez sur l'icône du globe dans la barre d'activité (barre latérale gauche)
+3. Cliquez sur **Vérifier l'état** — Polyglot démarrera Ollama et téléchargera le modèle si nécessaire.
 4. Sélectionnez du texte et appuyez sur `Ctrl+Alt+T` (ou `Cmd+Alt+T` sur Mac).
 
 ## Commandes
@@ -46,7 +46,7 @@ Polyglot exécute [TranslateGemma 12B](https://ai.google.dev/gemma/docs/core/tra
 |---------|----------|-------------|
 | **Polyglot : Traduire la sélection** | `Ctrl+Alt+T` | Traduit le texte sélectionné directement. |
 | **Polyglot: Translate File** | — | Traduit le fichier actuel vers un nouveau fichier. |
-| **Polyglot : Traduire README** | — | Traduction en masse du fichier README.md vers plusieurs langues. |
+| **Polyglot : Traduire README** | — | Traduit en masse le fichier README.md dans plusieurs langues. |
 | **Polyglot: Check Status** | — | Vérifie la connexion à Ollama et la disponibilité du modèle. |
 | **Polyglot: Help** | — | Accès rapide aux paramètres, au guide et aux liens. |
 
@@ -79,24 +79,13 @@ Polyglot utilise [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcpt
 2. Télécharge automatiquement le modèle TranslateGemma lors de la première utilisation.
 3. Divise les longs textes en paragraphes/phrases.
 4. Applique un glossaire logiciel pour les termes techniques précis.
-5. Corrige les problèmes courants du modèle (alternatives en double, points de fin).
+5. Corrige les problèmes courants du modèle (alternatives dupliquées, points de fin).
 
 Pour la traduction de README, il utilise une segmentation intelligente : les blocs de code, les badges HTML et les URL sont préservés intacts, tandis que les titres, les paragraphes et le contenu des tableaux sont traduits.
 
-## Confidentialité
+## Sécurité et portée des données
 
-Toutes les traductions se font localement sur votre GPU. Rien n'est envoyé à un service cloud. Votre texte ne quitte jamais votre machine. Pas de télémétrie.
-
-## Tableau de bord
-
-| Catégorie | Score | Notes |
-|----------|-------|-------|
-| A. Sécurité | 10/10 | SECURITY.md, fonctionnement local uniquement, sans télémétrie, sans cloud. |
-| B. Gestion des erreurs | 8/10 | Retour d'information via la barre d'état, récupération automatique par Ollama, messages d'erreur. |
-| C. Documentation pour les utilisateurs | 9/10 | README, CHANGELOG, guide pas à pas, documentation des paramètres. |
-| D. Qualité du produit | 9/10 | Intégration continue et tests (88), Marketplace de VS Code, emballage VSIX. |
-| E. Identité | 10/10 | Logo, traductions, page d'accueil, fiche de présentation sur le marché. |
-| **Total** | **46/50** | |
+**Données concernées :** texte dans l'éditeur actif (lecture seule pour la sélection, écriture pour le remplacement), fichiers dans l'espace de travail pour les fonctions "Traduire le fichier" / "Traduire le README" (crée de nouveaux fichiers à côté des originaux). **Données non concernées :** aucun fichier en dehors de l'espace de travail, aucune information d'identification du système d'exploitation, aucune donnée du navigateur. **Réseau :** se connecte uniquement à Ollama local (`localhost:11434` par défaut) — **pas de communication vers le cloud**. **Aucune donnée de télémétrie** n'est collectée ou envoyée.
 
 ## Licence
 
