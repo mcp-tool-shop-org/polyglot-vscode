@@ -36,6 +36,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   // Sidebar — status tree
   const statusTree = new StatusTreeProvider();
   context.subscriptions.push(
+    statusTree,
     vscode.window.registerTreeDataProvider('polyglot.status', statusTree),
     vscode.commands.registerCommand('polyglot.refreshStatus', () =>
       statusTree.refresh()

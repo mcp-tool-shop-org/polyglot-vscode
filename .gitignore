@@ -3,3 +3,6 @@ dist/
 *.vsix
 .vscode-test/
 site/.astro/
+site/dist/
+site/node_modules/
+.polyglot-cache.json

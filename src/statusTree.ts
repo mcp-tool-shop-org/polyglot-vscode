@@ -9,7 +9,7 @@ interface StatusItem {
   command?: string;
 }
 
-export class StatusTreeProvider implements vscode.TreeDataProvider<StatusItem> {
+export class StatusTreeProvider implements vscode.TreeDataProvider<StatusItem>, vscode.Disposable {
   private _onDidChangeTreeData = new vscode.EventEmitter<void>();
   readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
@@ -17,10 +17,17 @@ export class StatusTreeProvider implements vscode.TreeDataProvider<StatusItem> {
     { label: 'Checking…', icon: 'sync~spin' },
   ];
 
+  private _pollTimer: ReturnType<typeof setInterval>;
+
   constructor() {
     this.refresh();
     // Auto-refresh every 30s
-    setInterval(() => this.refresh(), 30_000);
+    this._pollTimer = setInterval(() => this.refresh(), 30_000);
+  }
+
+  dispose(): void {
+    clearInterval(this._pollTimer);
+    this._onDidChangeTreeData.dispose();
   }
 
   refresh(): void {

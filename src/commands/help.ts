@@ -30,7 +30,7 @@ export async function help(): Promise<void> {
       },
       {
         label: '$(info) About',
-        description: 'Polyglot v0.1.0 — TranslateGemma 12B via Ollama, 55 languages',
+        description: 'Polyglot v0.1.1 — TranslateGemma 12B via Ollama, 55 languages',
         action: 'about',
       },
     ],
@@ -65,7 +65,7 @@ export async function help(): Promise<void> {
       break;
     case 'about':
       vscode.window.showInformationMessage(
-        'Polyglot v0.1.0 — Local GPU translation powered by TranslateGemma 12B via Ollama. ' +
+        'Polyglot v0.1.1 — Local GPU translation powered by TranslateGemma 12B via Ollama. ' +
           '55 languages, zero cloud dependency. All translation happens on your machine.',
         'GitHub',
         'Ollama'

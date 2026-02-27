@@ -9,7 +9,7 @@ export const config: SiteConfig = {
   footerText: 'MIT Licensed — built by <a href="https://github.com/mcp-tool-shop-org" style="color:var(--color-muted);text-decoration:underline">mcp-tool-shop-org</a>',
 
   hero: {
-    badge: 'v0.1.0 — VS Code Extension',
+    badge: 'v0.1.1 — VS Code Extension',
     headline: 'Local GPU Translation',
     headlineAccent: 'inside VS Code.',
     description: '55 languages. Zero cloud dependency. All translation happens on your machine via TranslateGemma 12B + Ollama.',
