@@ -1,6 +1,24 @@
 import * as vscode from 'vscode';
 import { LANGUAGES, type Language } from '@mcptoolshop/polyglot-mcp/languages';
 
+// ---------------------------------------------------------------------------
+// Structured Error Shape (Shipcheck Gate B)
+// ---------------------------------------------------------------------------
+
+export type ErrorCode =
+  | 'OLLAMA_UNAVAILABLE'
+  | 'MODEL_NOT_FOUND'
+  | 'UNSUPPORTED_LANGUAGE'
+  | 'TRANSLATE_ERROR';
+
+export interface ErrorInfo {
+  readonly code: ErrorCode;
+  readonly message: string;
+  readonly hint: string;
+  readonly cause?: string;
+  readonly retryable: boolean;
+}
+
 /** Read all Polyglot settings from VS Code configuration. */
 export function getConfig() {
   const cfg = vscode.workspace.getConfiguration('polyglot');
@@ -69,55 +87,90 @@ export function log(msg: string): void {
 }
 
 /**
+ * Classify a raw error into a structured ErrorInfo object.
+ * The structured shape satisfies Shipcheck Gate B: code, message, hint, cause?, retryable?.
+ */
+export function classifyError(context: string, err: unknown): ErrorInfo {
+  const raw = err instanceof Error ? err.message : String(err);
+
+  if (raw.includes('fetch') || raw.includes('ECONNREFUSED') || raw.includes('Cannot connect')) {
+    return {
+      code: 'OLLAMA_UNAVAILABLE',
+      message: `${context}: Ollama doesn't seem to be running. Start it first, or check your connection.`,
+      hint: 'Run "Polyglot: Check Status" or start Ollama manually.',
+      cause: raw,
+      retryable: true,
+    };
+  }
+
+  if (raw.includes('not found') || raw.includes('Could not pull')) {
+    return {
+      code: 'MODEL_NOT_FOUND',
+      message: `${context}: The translation model isn't available. Run "Polyglot: Check Status" to download it.`,
+      hint: 'Run "Polyglot: Check Status" to auto-pull the model.',
+      cause: raw,
+      retryable: true,
+    };
+  }
+
+  if (raw.includes('Unsupported')) {
+    return {
+      code: 'UNSUPPORTED_LANGUAGE',
+      message: `${context}: ${raw}. Polyglot supports 55 languages — check the language code in Settings.`,
+      hint: 'Open Settings and verify the language code.',
+      cause: raw,
+      retryable: false,
+    };
+  }
+
+  return {
+    code: 'TRANSLATE_ERROR',
+    message: `${context}: ${raw}`,
+    hint: 'Run "Polyglot: Help" for troubleshooting.',
+    cause: raw,
+    retryable: false,
+  };
+}
+
+/**
  * Show a friendly error message with contextual action buttons.
- * Translates raw error messages into human-readable guidance.
+ * Classifies the error into a structured shape, logs it, and surfaces
+ * the message via VS Code notification API.
  */
 export function friendlyError(context: string, err: unknown): void {
-  const raw = err instanceof Error ? err.message : String(err);
-  log(`${context}: ${raw}`);
+  const info = classifyError(context, err);
+  log(`[${info.code}] ${info.message} (retryable: ${info.retryable})`);
 
-  // Ollama not running
-  if (raw.includes('fetch') || raw.includes('ECONNREFUSED') || raw.includes('Cannot connect')) {
-    vscode.window.showErrorMessage(
-      `${context}: Ollama doesn't seem to be running. Start it first, or check your connection.`,
-      'Check Status',
-      'Help'
-    ).then((action) => {
-      if (action === 'Check Status') vscode.commands.executeCommand('polyglot.checkStatus');
-      else if (action === 'Help') vscode.commands.executeCommand('polyglot.help');
-    });
-    return;
-  }
+  const actions: Record<ErrorCode, { buttons: string[]; handler: (a: string) => void }> = {
+    OLLAMA_UNAVAILABLE: {
+      buttons: ['Check Status', 'Help'],
+      handler: (a) => {
+        if (a === 'Check Status') vscode.commands.executeCommand('polyglot.checkStatus');
+        else if (a === 'Help') vscode.commands.executeCommand('polyglot.help');
+      },
+    },
+    MODEL_NOT_FOUND: {
+      buttons: ['Check Status'],
+      handler: (a) => {
+        if (a === 'Check Status') vscode.commands.executeCommand('polyglot.checkStatus');
+      },
+    },
+    UNSUPPORTED_LANGUAGE: {
+      buttons: ['Settings'],
+      handler: (a) => {
+        if (a === 'Settings') vscode.commands.executeCommand('workbench.action.openSettings', 'polyglot');
+      },
+    },
+    TRANSLATE_ERROR: {
+      buttons: ['Help'],
+      handler: (a) => {
+        if (a === 'Help') vscode.commands.executeCommand('polyglot.help');
+      },
+    },
+  };
 
-  // Model not found
-  if (raw.includes('not found') || raw.includes('Could not pull')) {
-    vscode.window.showErrorMessage(
-      `${context}: The translation model isn't available. Run "Polyglot: Check Status" to download it.`,
-      'Check Status'
-    ).then((action) => {
-      if (action === 'Check Status') vscode.commands.executeCommand('polyglot.checkStatus');
-    });
-    return;
-  }
-
-  // Unsupported language
-  if (raw.includes('Unsupported')) {
-    vscode.window.showErrorMessage(
-      `${context}: ${raw}. Polyglot supports 55 languages — check the language code in Settings.`,
-      'Settings'
-    ).then((action) => {
-      if (action === 'Settings') {
-        vscode.commands.executeCommand('workbench.action.openSettings', 'polyglot');
-      }
-    });
-    return;
-  }
-
-  // Generic fallback
-  vscode.window.showErrorMessage(
-    `${context}: ${raw}`,
-    'Help'
-  ).then((action) => {
-    if (action === 'Help') vscode.commands.executeCommand('polyglot.help');
+  const { buttons, handler } = actions[info.code];
+  vscode.window.showErrorMessage(info.message, ...buttons).then((action) => {
+    if (action) handler(action);
   });
 }

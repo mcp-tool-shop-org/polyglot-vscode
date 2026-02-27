@@ -2,7 +2,7 @@
   "name": "polyglot-vscode",
   "displayName": "Polyglot — Local GPU Translation",
   "description": "Translate text, files, and READMEs using TranslateGemma via Ollama — 55 languages, zero cloud dependency",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "publisher": "mcp-tool-shop",
   "license": "MIT",
   "repository": {
@@ -245,6 +245,7 @@
     "watch": "node esbuild.mjs --watch",
     "compile": "tsc -p ./",
     "test": "vitest run",
+    "verify": "npm test && npm run build && npx vsce package --no-dependencies",
     "package": "vsce package",
     "publish": "vsce publish"
   },

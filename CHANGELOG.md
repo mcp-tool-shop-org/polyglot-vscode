@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0 — 2026-02-27
+
+### Added
+
+- Structured error handling with typed error codes (OLLAMA_UNAVAILABLE, MODEL_NOT_FOUND, UNSUPPORTED_LANGUAGE, TRANSLATE_ERROR)
+- Verify script: test + build + VSIX package in one command
+- Dependency audit job in CI
+- Threat model paragraph in README (Security & Data Scope)
+- Shipcheck compliance: SHIP_GATE.md, SCORECARD.md
+
+### Changed
+
+- Bumped to v1.0.0 — production-stable
+- SECURITY.md updated for 1.0.0 support
+- `friendlyError()` now classifies errors into structured ErrorInfo shape with code, message, hint, cause, retryable
+
 ## 0.1.3 — 2026-02-27
 
 ### Added

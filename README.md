@@ -83,20 +83,9 @@ Polyglot wraps [@mcptoolshop/polyglot-mcp](https://www.npmjs.com/package/@mcptoo
 
 For README translation, it uses intelligent segmentation — code blocks, HTML badges, and URLs are preserved untouched while headings, paragraphs, and table content are translated.
 
-## Privacy
+## Security & Data Scope
 
-All translation happens locally on your GPU. Nothing is sent to any cloud service. Your text never leaves your machine. No telemetry.
-
-## Scorecard
-
-| Category | Score | Notes |
-|----------|-------|-------|
-| A. Security | 10/10 | SECURITY.md, local-only, no telemetry, no cloud |
-| B. Error Handling | 8/10 | Status bar feedback, Ollama auto-recovery, error messages |
-| C. Operator Docs | 9/10 | README, CHANGELOG, walkthrough, settings docs |
-| D. Shipping Hygiene | 9/10 | CI + tests (88), VS Code Marketplace, VSIX packaging |
-| E. Identity | 10/10 | Logo, translations, landing page, marketplace listing |
-| **Total** | **46/50** | |
+**Data touched:** text in the active editor (read-only for selection, write for replacement), files in the workspace for Translate File/Translate README (creates new files alongside originals). **Data NOT touched:** no files outside the workspace, no OS credentials, no browser data. **Network:** connects only to local Ollama (`localhost:11434` by default) — **no cloud egress**. **No telemetry** is collected or sent.
 
 ## License
 
